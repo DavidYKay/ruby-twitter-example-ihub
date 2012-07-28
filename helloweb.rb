@@ -9,33 +9,46 @@ end
 get '/example' do
 end
 
-get '/tweets' do
-    raw_tweets = get_tweets 
+#get '/hello/:name' do
+#  # matches "GET /hello/foo" and "GET /hello/bar"
+#  # params[:name] is 'foo' or 'bar'
+#  "Hello #{params[:name]}!"
+#end
+
+post '/tweets' do
+
+    puts "Params: " + params.to_s
+
+    raw_tweets = get_tweets params[:search_term]
     
     everything = JSON.parse(raw_tweets)
 
     tweets = everything['results']
-    result_string = "<ul>"
 
-    tweets.each do |tweet|
-        result_string += "<li>"
-        result_string += tweet['text']
-        result_string += "</li>"
-    end
-    result_string += "</ul>"
-
-    #erb :index, :locals => {
-    #    :name => "David",
-    #    :tweets => tweets
-    #}
-
-    result_string
+    
+    erb :index, :locals => {
+        :name => "David",
+        :tweets => tweets
+    }
 end
 
-def get_tweets 
-   # |search_term|
+get '/tweets/:search_term' do
+    raw_tweets = get_tweets params[:search_term]
+    
+    everything = JSON.parse(raw_tweets)
+
+    tweets = everything['results']
+
+    
+    erb :index, :locals => {
+        :name => "David",
+        :tweets => tweets
+    }
+end
+
+def get_tweets(search_term)
     uri = URI.parse("http://search.twitter.com/search.json")
-    params = { :q => "olympics" }
+    params = { :q => search_term }
     uri.query = URI.encode_www_form(params)
 
     response = Net::HTTP.get_response(uri)

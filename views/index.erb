@@ -1,6 +1,14 @@
 <html>
   <body>
     Hello, <%= name %>
+
+    <form action="/tweets" method="post" id="global-nav-search">
+      <label class="hidden-elements" for="search-query">Search</label>
+
+      <input type="text" name="search_term" >
+      </input>
+
+    </form>
     <ul>
       <% tweets.each do |tweet| %>
         <li>
