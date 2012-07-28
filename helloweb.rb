@@ -15,8 +15,7 @@ end
 #  "Hello #{params[:name]}!"
 #end
 
-post '/tweets' do
-
+get '/tweets' do
     puts "Params: " + params.to_s
 
     raw_tweets = get_tweets params[:search_term]
@@ -24,21 +23,6 @@ post '/tweets' do
     everything = JSON.parse(raw_tweets)
 
     tweets = everything['results']
-
-    
-    erb :index, :locals => {
-        :name => "David",
-        :tweets => tweets
-    }
-end
-
-get '/tweets/:search_term' do
-    raw_tweets = get_tweets params[:search_term]
-    
-    everything = JSON.parse(raw_tweets)
-
-    tweets = everything['results']
-
     
     erb :index, :locals => {
         :name => "David",
