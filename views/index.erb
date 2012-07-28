@@ -1,0 +1,12 @@
+<html>
+  <body>
+    Hello, <%= name %>
+    <ul>
+      <% tweets.each do |tweet| %>
+        <li>
+          <%= tweet['from_user_name'] %> || <%= tweet['text'] %>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>

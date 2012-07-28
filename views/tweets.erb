@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <p>
+      Good day <%= name %>,
+    </p>
+    <p>
+      Tweets are:
+    </p>
+    <ul>
+    <% tweets.each do |tweet| %>
+      <li>
+        <%= tweet['from_user'] %> || <%= tweet['text'] %>
+      </li>
+    <% end %>
+    <ul>
+  </body>
+</html>
